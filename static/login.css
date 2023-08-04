@@ -1,0 +1,55 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #000;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    border: 1px solid #444; /* Slightly lighter border color */
+    padding: 10px;
+    margin: 23%;
+    margin-bottom: 20px;
+    background-color: #444; /* Darker post background color */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); /* Darker box shadow */
+    width: 50%;
+    margin-top: 20vh;
+    border-radius: 10px;
+    color: #ddd;
+}
+
+.container h2 {
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"] {
+    width: 90%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.form-group button {
+    width: 93%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.form-group p {
+    text-align: center;
+}

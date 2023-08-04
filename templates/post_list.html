@@ -1,0 +1,84 @@
+{%load static%}
+<!-- post_list.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>memes</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <header class = "header">
+        <div class="header-content">
+            <h1>meme threads</h1>
+        </div>
+        <div class="header-right">
+            <div class="create-post-button">
+                {%if user.is_authenticated%}
+                <a href = "{%url 'create_post'%}">
+                    <img src="{% static 'create.png' %}" width="20px" height ="20px"alt="create">
+                </a>
+                {%endif%}
+                {%if not user.is_authenticated%}
+                    <a href="{% url 'register'%}">register</a>
+                    <a href="{% url 'login'%}">login</a>
+                {% else %}
+                    <a href="{% url 'logout'%}"><img src = "{% static 'signout.png'%}" width = "20px" height ="25px"></a>
+                {%endif%}
+            </div>
+        </div>
+    </header>
+    <div class="post-list">
+        {% for post in posts %}
+        <div class="post">
+            <div class="post-content">
+                <a href = "{% url 'post_detail' post.pk %}" >
+                    <h2>{{ post.title|truncatechars:20 }}</h2>
+                </a>
+                <div class="post-meta">
+                    {% if post.categories %}
+                        <span class="post-categories">Categories: {{ post.categories }}</span>
+                    {% endif %}
+                </div>
+                <p>{{ post.content|truncatechars:200 }}</p>
+                {% if post.image %}
+                <!-- Display the image -->
+                <img src="{{ post.image.url }}" alt="{{ post.title }}">
+                {% endif %}
+                {% if post.video %}
+                <!-- Display the video with autoplay -->
+                <video class="post-video"  controls autoplay loop>
+                    <source src="{{ post.video.url }}" type="video/mp4">
+                    <!-- Add other video formats if needed -->
+                    Your browser does not support the video tag.
+                </video>
+                {% endif %}
+                
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <script>
+        const videos = document.querySelectorAll('.post-video');
+
+        const handleVideoVisibility = (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.play();
+                } else {
+                    entry.target.pause();
+                }
+            });
+        };
+
+        const videoObserver = new IntersectionObserver(handleVideoVisibility, {
+            threshold: 0.5, // Adjust the threshold as needed
+        });
+
+        videos.forEach((video) => {
+            videoObserver.observe(video);
+        });
+    </script>
+</body>
+</html>

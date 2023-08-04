@@ -1,0 +1,33 @@
+<!-- base.html -->
+
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Blog</title>
+    <!-- Your CSS and other head elements -->
+</head>
+<body>
+    <nav>
+        <!-- Your navigation elements -->
+        {% if user.is_authenticated %}
+            {% if user.userprofile.profile_picture %}
+                <img src="{{ user.userprofile.profile_picture.url }}" alt="{{ user.username }}'s Profile Picture" class="rounded-circle" style="width: 40px; height: 40px;">
+            {% else %}
+                <!-- Default profile picture if user does not have one -->
+                <img src="{% static 'path/to/default/profile_picture.jpg' %}" alt="{{ user.username }}'s Profile Picture" class="rounded-circle" style="width: 40px; height: 40px;">
+            {% endif %}
+            <span class="navbar-text">Welcome, {{ user.username }}!</span>
+        {% endif %}
+    </nav>
+
+    <div class="container">
+        <!-- Your main content -->
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <!-- Your JavaScript and other scripts -->
+</body>
+</html>

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% if post %}Edit Blog Post{% else %}Create Blog Post{% endif %}</title>
+</head>
+<body>
+    <h1>{% if post %}Edit Blog Post{% else %}Create Blog Post{% endif %}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+    </form>
+    <p><a href="{% url 'post_list' %}">Cancel</a></p>
+</body>
+</html>

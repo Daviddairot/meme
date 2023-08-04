@@ -1,0 +1,29 @@
+<!-- delete_post.html -->
+{%load static%}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Delete Post</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>Delete Post</h1>
+        </div>
+        <div class="logo">
+            <img src="{% static 'logo.png' %}" alt="Blog Logo">
+        </div>
+    </header>
+    <div class="delete-form">
+        <h2>Confirm Deletion</h2>
+        <p>Are you sure you want to delete the post "{{ post.title }}"?</p>
+        <form method="post">
+            {% csrf_token %}
+            <input type="submit" value="Delete">
+        </form>
+        <a href="{% url 'post_detail' post.pk %}">Cancel</a>
+    </div>
+</body>
+</html>

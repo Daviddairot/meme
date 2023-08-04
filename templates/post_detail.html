@@ -1,0 +1,47 @@
+<!-- post_detail.html -->
+{%load static%}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ post.title }}</title>
+    <link rel="stylesheet" href="{% static 'details.css' %}">
+</head>
+<body>
+    <header>
+        <div class="header">
+            <a href ="{%url 'post_list'%}" class = "post_list_link"> <h1>meme threads</h1></a>
+        </div>
+    </header>
+    <div class="post-details">
+        <div class="post-content">
+            <h2 class="post-title">{{ post.title }}</h2>
+            {% if post.categories %}
+            <span class="post-categories">Categories: {{ post.categories }}</span>
+            {% endif %}
+            <p>{{ post.content }}</p>
+            {% if post.image %}
+                <div class="post-image" >
+                    <img src = "{{post.image.url}}" width ="250" height="400"  alt="{{post.title}}">"
+                </div>
+            {% endif %}
+            {% if post.video %}
+                <div class="post-image">
+                    <a href="{% url 'post_detail' post.pk %}">
+                        <video class="post-video" controls autoplay loop>
+                            <source src="{{ post.video.url }}" type="video/mp4">
+                            <!-- Add other video formats if needed -->
+                            Your browser does not support the video tag.
+                        </video>
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+        {%if user.is_authenticated%}
+            <div class="post-actions">
+                <a href="{% url 'edit_post' post.pk %}" class="btn btn-edit">Edit</a>
+                <a href="{% url 'delete_post' post.pk %}" class="btn btn-delete">Delete</a>
+            </div>
+        {%endif%}
+    </div>
+</body>
+</html>

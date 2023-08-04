@@ -1,0 +1,33 @@
+{%load static%}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Post</title>
+    <link rel="stylesheet" href="{% static 'create_post.css' %}">
+</head>
+<body>
+    <div class="header">
+        <a href ="{%url 'post_list'%}" class = "post_list_link"> <h1>meme threads</h1></a>
+    </div>
+
+    <div class="form-container">
+        <h2>Create New Post</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required>
+
+            <label for="content">Content:</label>
+            <textarea id="content" name="content" rows="5" required></textarea>
+
+            <label for="image">Image (optional):</label>
+            <input type="file" id="image" name="image">
+
+            <label for="video">Video (optional):</label>
+            <input type="file" id="video" name="video">
+
+            <button type="submit">Create Post</button>
+        </form>
+    </div>
+</body>
+</html>
